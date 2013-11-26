@@ -60,7 +60,23 @@ POSSIBILITY OF SUCH DAMAGE.
 #define _VERSION_ "2013.11.05"
 
 #define WIN32_LEAN_AND_MEAN
-#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION 
+
+// Removed this define below because I got the following error in clang:
+// In file included from transformations/transformations.c:76:
+// In file included from /usr/local/lib/python2.7/site-packages/numpy/core/include/numpy/arrayobject.h:4:
+// In file included from /usr/local/lib/python2.7/site-packages/numpy/core/include/numpy/ndarrayobject.h:17:
+// In file included from /usr/local/lib/python2.7/site-packages/numpy/core/include/numpy/ndarraytypes.h:1726:
+// /usr/local/lib/python2.7/site-packages/numpy/core/include/numpy/npy_deprecated_api.h:11:2: warning: 
+//       "Using deprecated NumPy API, disable it by #defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION"
+//       [-W#warnings]
+// #warning "Using deprecated NumPy API, disable it by #defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION"
+//  ^
+// /usr/local/lib/python2.7/site-packages/numpy/core/include/numpy/npy_deprecated_api.h:23:2: error: Should
+//       never include npy_deprecated_api directly.
+// #error Should never include npy_deprecated_api directly.
+//  ^
+
+// #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION 
 
 #include "Python.h"
 
