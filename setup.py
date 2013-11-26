@@ -1,4 +1,4 @@
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 import numpy
 setup(name='_transformations',
       author='Christoph Gohlke',
