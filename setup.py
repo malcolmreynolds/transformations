@@ -1,14 +1,16 @@
 from setuptools import setup, Extension
+import os.path as osp
 import numpy
 
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    return open(osp.join(osp.dirname(__file__), fname)).read()
 
 setup(name='transformations',
       author='Christoph Gohlke',
       description="Homogeneous Transformation Matrices and Quaternions.",
       license='BSD',
-      version='2013.06.29',
+      date='2013.06.29',
+      version='0.0.1',
       packages=['transformations'],
       long_description=read('README.md'),
       install_requires=['numpy', 'cython'],

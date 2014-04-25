@@ -14,4 +14,4 @@ from transformations import (identity_matrix, translation_matrix,
 	random_rotation_matrix, Arcball, arcball_map_to_sphere,
 	arcball_constrain_to_axis, arcball_nearest_axis, vector_norm, unit_vector,
 	random_vector, vector_product, angle_between_vectors, inverse_matrix,
-	concatenate_matrices, is_same_transform)
+	concatenate_matrices, is_same_transform, apply_transform)

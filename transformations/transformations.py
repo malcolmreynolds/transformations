@@ -661,7 +661,7 @@ def shear_matrix(angle, direction, point, normal):
     normal = unit_vector(normal[:3])
     direction = unit_vector(direction[:3])
     if abs(numpy.dot(normal, direction)) > 1e-6:
-        raise ValueError("direction and normal vectors are not orthogonal")
+        raise ValueError("direction and normal vectors are not orthogonal, diff is %f" % abs(numpy.dot(normal, direction)))
     angle = math.tan(angle)
     M = numpy.identity(4)
     M[:3, :3] += angle * numpy.outer(direction, normal)
@@ -1851,6 +1851,19 @@ def concatenate_matrices(*matrices):
     return M
 
 
+def apply_transform(matrix, points):
+    """Return 3D cartesian points after applying transform.
+
+    The points are converted to 3D Homogeneous, the transformation
+    is applied, and then they are converted back to Cartesian"""
+    if points.shape[0] != 3:
+        raise ValueError("points must be 3xN")
+    points = numpy.vstack([points, numpy.ones((1, points.shape[1]))])
+    tformed_points = numpy.dot(matrix, points)
+    tformed_points = tformed_points[:3, :] / tformed_points[3, :]
+    return tformed_points
+
+
 def is_same_transform(matrix0, matrix1):
     """Return True if two matrices perform same transformation.
 
@@ -1898,8 +1911,9 @@ def _import_module(name, package=None, warn=True, prefix='_py_', ignore='_'):
             globals()[attr] = getattr(module, attr)
         return True
 
-
+# print "about to do import_module, id(apply_transform) = %x" % id(apply_transform)
 _import_module('_transformations')
+# print "after done import_module, id(apply_transform) = %x" % id(apply_transform)
 
 if __name__ == "__main__":
     import doctest
