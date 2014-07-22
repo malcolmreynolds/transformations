@@ -1911,13 +1911,13 @@ def _import_module(name, package=None, warn=True, prefix='_py_', ignore='_'):
             globals()[attr] = getattr(module, attr)
         return True
 
-# print "about to do import_module, id(apply_transform) = %x" % id(apply_transform)
-_import_module('_transformations')
-# print "after done import_module, id(apply_transform) = %x" % id(apply_transform)
+
+# print("about to do import_module, id(inverse_matrix) = %x" % id(inverse_matrix))
+_import_module('transformations._transformations')
+# print("after done import_module, id(inverse_matrix) = %x" % id(inverse_matrix))
 
 if __name__ == "__main__":
     import doctest
     import random  # used in doctests
     numpy.set_printoptions(suppress=True, precision=5)
     doctest.testmod()
-
